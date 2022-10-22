@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="791ac7de-2314-4871-80e8-bb25b13cdfb9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/codenameone_library_appended.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/codenameone_library_appended.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/codenameone_library_required.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/codenameone_library_required.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADAdMobExtras.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADAdNetworkExtras.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADAdSize.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADBannerView.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADBannerViewDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADInAppPurchase.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADInAppPurchaseDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADInterstitial.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADInterstitialDelegate.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADModules.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADRequest.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GADRequestError.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/GoogleConversionPing.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/com_codename1_admob_AdMobNativeImpl.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/objectivec/com_codename1_admob_AdMobNativeImpl.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/src/main/resources/libGoogleAdMobAds.a" beforeDir="false" />
-    </list>
+    <list default="true" id="791ac7de-2314-4871-80e8-bb25b13cdfb9" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
