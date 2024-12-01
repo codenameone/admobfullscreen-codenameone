@@ -94,6 +94,34 @@ Add dependency to your common/pom.xml file:
 
 Add the "admob-fullscreen" plugin through Codename One extensions (in Codename One Settings)
 
+## iOS Build Hints
+
+On iOS, you need to add the the following to your `ios.plistInject` build hint:
+
+```xml
+<key>GADApplicationIdentifier</key>
+<string>... your Admob App ID...</string>
+```
+
+e.g.
+
+```properties
+ios.plistInject=<key>GADApplicationIdentifier</key><string>ca-app-pub-394025xxxxxxxx</string>
+```
+
+## Android Build Hints
+
+Add the following to your `android.xapplication` build hint:
+
+```
+<meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="YOUR_APP_ID_HERE"/>
+```
+
+If you don't have an Admob App ID, you can create one [here](https://admob.google.com).
+
+## Example Project
+
+See a basic sample Maven project [here](https://github.com/shannah/fullscreenadstest).
 
 ## Build from Source
 
