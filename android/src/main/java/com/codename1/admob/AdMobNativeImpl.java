@@ -1,138 +1,89 @@
 package com.codename1.admob;
 
 import com.google.android.gms.ads.*;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.LoadAdError;
+import androidx.annotation.NonNull;
 import com.codename1.impl.android.*;
-
-
-import com.codename1.impl.android.*;
-import java.lang.Thread;
-
-// see https://developers.google.com/mobile-ads-sdk/docs/admob/android/interstitial
 
 public class AdMobNativeImpl {
-    private InterstitialAd interstitial;
-    final long timeout = 2000;
-    long startNativeRun = 0L;
-    boolean duringNativeRun = false;
-    boolean isLoaded = false;
-    
+    private InterstitialAd interstitialAd;
     private String adID;
-    
+
     public void init(String adID) {
         this.adID = adID;
-    }
-
-
-    /**
-     * Makes sure the call is from the native thread, timeout = 2000ms
-     * @return
-     */
-    public boolean isLoaded() {
-        final CodenameOneActivity activity = (CodenameOneActivity)AndroidNativeUtil.getActivity();
-
-        System.err.println("inside AdMobFullPageImpl.isLoaded - activity "+(activity == null ? "is null" : "is not null"));
-
-        duringNativeRun = true;
-        startNativeRun = System.currentTimeMillis();
-        activity.runOnUiThread(new Runnable() {
-
-            public void run() {
-                isLoaded = interstitial.isLoaded();
-                System.err.println("loaded = "+isLoaded);
-                duringNativeRun = false;
-            }
-        });
-
-        while (System.currentTimeMillis()-startNativeRun < timeout) {
-            if (!duringNativeRun) {
-                break;
-            }
-
-            try {
-                Thread.sleep(50);
-            }
-            catch (Exception ex) {
-                System.err.println("Thread interrupted!");
-                ex.printStackTrace();
-                return isLoaded;
-            }
-        }
-
-        return isLoaded;
+        // Initialize MobileAds if you haven't yet:
+        // MobileAds.initialize(context, initializationStatus -> {});
     }
 
     public boolean loadAd() {
-        final CodenameOneActivity activity = (CodenameOneActivity)AndroidNativeUtil.getActivity();
-        interstitial = new InterstitialAd(activity);
-        interstitial.setAdUnitId(adID);
-        interstitial.setAdListener(new AdListener() {
+        final CodenameOneActivity activity = (CodenameOneActivity) AndroidNativeUtil.getActivity();
 
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                Callback.onAdClosed();
-            }
+        AdRequest adRequest = new AdRequest.Builder().build();
 
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                super.onAdFailedToLoad(errorCode);
-                Callback.onAdFailedToLoad(errorCode);
-            }
+        // InterstitialAd.load(...) is the new approach in v20+
+        InterstitialAd.load(
+                activity,
+                adID,
+                adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd ad) {
+                        interstitialAd = ad;
 
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-                Callback.onAdLeftApplication();                
-            }
+                        interstitialAd.setFullScreenContentCallback(
+                                new FullScreenContentCallback() {
+                                    @Override
+                                    public void onAdDismissedFullScreenContent() {
+                                        interstitialAd = null;
+                                        Callback.onAdClosed();
+                                    }
 
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                Callback.onAdLoaded();                
-            }
+                                    @Override
+                                    public void onAdFailedToShowFullScreenContent(AdError adError) {
+                                        interstitialAd = null;
+                                        // (Optional) Handle error if you need
+                                        Callback.onAdFailedToLoad(adError.getCode());
+                                    }
 
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                Callback.onAdOpened();                
-            }
-            
-            
-        
-        });
-        
-        try {
-            // Create ad request.
-            final AdRequest adRequest = new AdRequest.Builder().build();
+                                    @Override
+                                    public void onAdShowedFullScreenContent() {
+                                        Callback.onAdOpened();
+                                    }
+                                }
+                        );
 
-            activity.runOnUiThread(new Runnable() {
+                        // Ad loaded callback
+                        Callback.onAdLoaded();
+                    }
 
-                public void run() {
-                    interstitial.loadAd(adRequest);
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Notify that loading failed
+                        Callback.onAdFailedToLoad(loadAdError.getCode());
+                    }
                 }
-            });
+        );
 
-            return true;
-        }
-        catch (Exception ex) {
-            System.err.println("startLoadingAd - exception thrown");
-            ex.printStackTrace();
+        return true;
+    }
 
-            return false;
-        }
+    public boolean isLoaded() {
+        // The new SDK does not provide isLoaded(). You must track if `interstitialAd` is non-null.
+        return interstitialAd != null;
     }
 
     public void showAd() {
-        System.err.println("inside AdMobFullPageImpl.showAd");
-        
-        final CodenameOneActivity activity = (CodenameOneActivity)AndroidNativeUtil.getActivity();
-
-        System.err.println("inside showAd - activity "+(activity == null ? "is null" : "is not null"));
+        final CodenameOneActivity activity = (CodenameOneActivity) AndroidNativeUtil.getActivity();
 
         activity.runOnUiThread(new Runnable() {
-
             public void run() {
-            	interstitial.show();
+                if (interstitialAd != null) {
+                    interstitialAd.show(activity);
+                }
             }
         });
     }
