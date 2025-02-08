@@ -4,7 +4,7 @@
 
     <groupId>com.codenameone</groupId>
     <artifactId>admob-fullscreen</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.6-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>admob-fullscreen</name>
