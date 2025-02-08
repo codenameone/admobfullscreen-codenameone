@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admob-fullscreen-javase" />
+        <module name="admob-fullscreen-android" />
+        <module name="admob-fullscreen-win" />
+        <module name="admob-fullscreen-common" />
+        <module name="admob-fullscreen-ios" />
+        <module name="admob-fullscreen-javascript" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>
