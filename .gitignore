@@ -2,3 +2,4 @@
 /build/
 target
 .DS_Store
+/common/src/main/build/

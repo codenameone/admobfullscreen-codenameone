@@ -4,11 +4,11 @@
   <parent>
       <groupId>com.codenameone</groupId>
       <artifactId>admob-fullscreen</artifactId>
-      <version>1.0.5-SNAPSHOT</version>
+      <version>1.0.5</version>
   </parent>
   <groupId>com.codenameone</groupId>
   <artifactId>admob-fullscreen-javascript</artifactId>
-  <version>1.0.5-SNAPSHOT</version>
+  <version>1.0.5</version>
 
   <name>admob-fullscreen-javascript</name>
   <build>
